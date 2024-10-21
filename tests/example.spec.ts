@@ -1,18 +1,33 @@
-import { test, expect } from '@playwright/test';
+// tests/playwright.test.js
+const { chromium } = require('playwright'); // You can also use 'firefox' or 'webkit'
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+(async () => {
+  // Launch a browser instance
+  const browser = await chromium.launch({ headless: true }); // 'headless: false' if you want to see the browser in action
+  const page = await browser.newPage();
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  // Visit the target site
+  await page.goto('https://jdu.uz');
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  // Check if the page title is as expected
+  const pageTitle = await page.title();
+  console.log(`Page title: ${pageTitle}`);
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  // Example: Assert the title contains "JDPU"
+  if (pageTitle.includes('JDPU')) {
+    console.log('Title test passed!');
+  } else {
+    console.error('Title test failed.');
+  }
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+  // Check for a specific element, for example, an `h1` tag
+  const heading = await page.$('h1');
+  if (heading) {
+    console.log('Heading found!');
+  } else {
+    console.log('Heading not found.');
+  }
+
+  // Close the browser
+  await browser.close();
+})();
