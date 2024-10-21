@@ -13,23 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code from the repository
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Correct usage of 'uses'
 
-      # Set up Node.js environment
+      # Step 2: Set up Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3  # Correct usage of 'uses'
         with:
           node-version: '18'
 
-      # Install dependencies (Playwright)
+      # Step 3: Install project dependencies (including Playwright)
       - name: Install dependencies
-        run: npm install
+        run: npm install  # Correct usage of 'run'
 
-      # Install Playwright browsers
+      # Step 4: Install Playwright browsers
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: npx playwright install  # Correct usage of 'run'
 
-      # Run the Playwright test
+      # Step 5: Run the Playwright test
       - name: Run Playwright Test
+        run: node tests/playwright.test.js  # Correct usage of 'run'
