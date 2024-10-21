@@ -1,32 +1,25 @@
-// tests/playwright.test.js
-const { chromium } = require('playwright'); // You can also use 'firefox' or 'webkit'
+// tests/check_form.test.js
+const { chromium } = require('playwright');
 
 (async () => {
-  // Launch a browser instance
-  const browser = await chromium.launch({ headless: true }); // 'headless: false' if you want to see the browser in action
+  // Launch the browser (headless mode for GitHub Actions)
+  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
-  // Visit the target site
-  await page.goto('https://jdu.uz');
+  // Navigate to the form page
+  await page.goto('https://www.jdu.uz/abituriyentlar_uchun', { timeout: 60000 });
 
-  // Check if the page title is as expected
-  const pageTitle = await page.title();
-  console.log(`Page title: ${pageTitle}`);
+  // Fill in the name field
+  await page.fill('input[placeholder="Ismingiz"]', 'John Doe'); // Adjust selector based on the actual input field
 
-  // Example: Assert the title contains "JDPU"
-  if (pageTitle.includes('JDPU')) {
-    console.log('Title test passed!');
-  } else {
-    console.error('Title test failed.');
-  }
+  // Fill in the phone number field
+  await page.fill('input[type="tel"]', '+998 99-999-9999'); // Adjust if needed
 
-  // Check for a specific element, for example, an `h1` tag
-  const heading = await page.$('h1');
-  if (heading) {
-    console.log('Heading found!');
-  } else {
-    console.log('Heading not found.');
-  }
+  // Click the submit button
+  await page.click('text=Yuborish'); // Click the submit button
+
+  // Optionally, you can wait for a success message or redirect
+  // await page.waitForSelector('selector-for-success-message', { timeout: 60000 });
 
   // Close the browser
   await browser.close();

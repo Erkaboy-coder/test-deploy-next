@@ -15,22 +15,22 @@ jobs:
     steps:
       # Step 1: Checkout the code from the repository
       - name: Checkout code
-        uses: actions/checkout@v3  # Correct usage of 'uses'
+        uses: actions/checkout@v3
 
       # Step 2: Set up Node.js environment
       - name: Setup Node.js
-        uses: actions/setup-node@v3  # Correct usage of 'uses'
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
 
       # Step 3: Install project dependencies (including Playwright)
       - name: Install dependencies
-        run: npm install  # Correct usage of 'run'
+        run: npm install
 
       # Step 4: Install Playwright browsers
       - name: Install Playwright browsers
-        run: npx playwright install  # Correct usage of 'run'
+        run: npx playwright install
 
       # Step 5: Run the Playwright test
-      - name: Run Playwright Test
-        run: node tests/playwright.test.js  # Correct usage of 'run'
+      - name: Run Playwright Form Test
+        run: node tests/check_form.test.js
