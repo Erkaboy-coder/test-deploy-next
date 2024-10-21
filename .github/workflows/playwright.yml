@@ -33,4 +33,4 @@ jobs:
 
       # Step 5: Run the Playwright test
       - name: Run Playwright Form Test
-        run: node tests/check_form.test.js
+        run: node tests/check_form.test.js # Ensure this path is correct
